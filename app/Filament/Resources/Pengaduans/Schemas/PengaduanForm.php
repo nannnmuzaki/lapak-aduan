@@ -178,6 +178,7 @@ class PengaduanForm
                             ->multiple()
                             ->maxFiles(5)
                             ->helperText('Upload foto pendukung pengaduan (maksimal 5 foto).')
+                            ->visibility('public')
                             ->directory('pengaduan-images')
                             ->columnSpanFull(),
                     ])->columns(2),
@@ -205,10 +206,12 @@ class PengaduanForm
                                 FileUpload::make('bukti_terusan_path')
                                     ->label('Bukti Terusan')
                                     ->helperText('Upload bukti terusan pengaduan ke OPD terkait.')
+                                    ->visibility('public')
                                     ->directory('bukti-terusan'),
                                 FileUpload::make('bukti_balasan_path')
                                     ->label('Bukti Balasan')
                                     ->helperText('Upload bukti balasan dari OPD terkait.')
+                                    ->visibility('public')
                                     ->directory('bukti-balasan'),
                             ]),
                         Grid::make([
