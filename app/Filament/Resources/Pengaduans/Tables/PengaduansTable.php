@@ -132,11 +132,21 @@ class PengaduansTable
                         'bukti_balasan_path' => $record->bukti_balasan_path,
                     ])
                     ->form([
-                        Toggle::make('is_verified')
-                            ->label('Verifikasi Pengaduan')
-                            ->helperText('Tandai pengaduan ini sebagai terverifikasi')
-                            ->visible(fn () => auth()->user()->can('verify_pengaduan'))
-                            ->columnSpanFull(),
+                        Grid::make([
+                            'default' => 1,
+                            'md' => 2,
+                        ])
+                            ->schema([
+                                Toggle::make('is_verified')
+                                    ->label('Verifikasi Pengaduan')
+                                    ->helperText('Tandai pengaduan ini sebagai terverifikasi')
+                                    ->visible(fn () => auth()->user()->can('verify_pengaduan')),
+
+                                Toggle::make('perlu_tindak_lanjut')
+                                    ->label('Tandai Perlu Tindak Lanjut')
+                                    ->helperText('Tandai pengaduan ini sebagai perlu tindak lanjut')
+                                    ->visible(fn () => auth()->user()->can('verify_pengaduan')),
+                            ]),
                         
                         RichEditor::make('balasan')
                                 ->label('Balasan Pengaduan')
@@ -160,12 +170,14 @@ class PengaduansTable
                                 FileUpload::make('bukti_terusan_path')
                                     ->label('Bukti Terusan')
                                     ->helperText('Upload bukti terusan pengaduan ke OPD terkait.')
+                                    ->visibility('public')
                                     ->directory('bukti-terusan')
                                     ->visible(fn () => auth()->user()->can('respond_pengaduan')),
                                 
                                 FileUpload::make('bukti_balasan_path')
                                     ->label('Bukti Balasan')
                                     ->helperText('Upload bukti balasan dari OPD terkait.')
+                                    ->visibility('public')
                                     ->directory('bukti-balasan')
                                     ->visible(fn () => auth()->user()->can('respond_pengaduan')),
                             ]),
