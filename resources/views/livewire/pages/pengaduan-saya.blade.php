@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     
-                    <p class="mb-3 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">{{ Str::of($pengaduan->isi)->toHtmlString() }}</p>
+                    <div class="mb-3 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">{{ Str::of($pengaduan->isi)->toHtmlString() }}</div>
                     
                     <div class="flex flex-wrap items-center gap-3 mb-3">
                         <span class="text-xs text-gray-500 dark:text-gray-500">No: {{ $pengaduan->nomor_pengaduan }}</span>
@@ -46,12 +46,12 @@
                     
                     <div class="flex items-center gap-3">
                         <button wire:click="showDetail({{ $pengaduan->id }})" 
-                            class="text-sm font-medium text-sky-600 hover:text-sky-700 dark:text-sky-400">
+                            class="text-sm font-medium text-sky-600 dark:text-sky-400 px-4 py-2 hover:bg-sky-50 dark:hover:bg-sky-900/20 rounded-lg hover:cursor-pointer">
                             Lihat Detail
                         </button>
                         <span class="text-gray-300 dark:text-gray-700">|</span>
                         <button wire:click="confirmDelete({{ $pengaduan->id }})" 
-                            class="text-sm font-medium text-red-600 hover:text-red-700 dark:text-red-400">
+                            class="text-sm font-medium text-red-600 dark:text-red-400 px-4 py-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg hover:cursor-pointer">
                             Hapus
                         </button>
                         <span class="ml-auto text-xs text-gray-500 dark:text-gray-500">{{ $pengaduan->created_at->diffForHumans() }}</span>
@@ -121,7 +121,7 @@
                     
                     <div>
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Isi Pengaduan</label>
-                        <p class="mt-1 text-gray-900 dark:text-white whitespace-pre-wrap">{{ Str::of($selectedPengaduan->isi)->toHtmlString() }}</p>
+                        <div class="mt-1 text-gray-900 dark:text-white whitespace-pre-wrap">{{ Str::of($selectedPengaduan->isi)->toHtmlString() }}</div>
                     </div>
                     
                     @if($selectedPengaduan->images_path && count($selectedPengaduan->images_path) > 0)
