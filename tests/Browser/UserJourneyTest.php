@@ -8,7 +8,7 @@ beforeEach(function () {
     $this->seed(DatabaseSeeder::class);
 });
 
-test('User Journey buat pengaduan baru', function () {
+test('User Journey buat pengaduan baru (Pengaduan CRUD)', function () {
     $user = User::where('email', 'rina.marlina@gmail.com')->first();
 
     visit('/')
@@ -32,5 +32,10 @@ test('User Journey buat pengaduan baru', function () {
         ->type('[wire\:model="isi"]', 'Saya ingin melaporkan bahwa sampah menumpuk di jalan raya dekat rumah saya dan belum diangkut selama seminggu terakhir.')
         ->pressAndWaitFor('Kirim Pengaduan', 2)
         ->navigate('/pengaduan-saya')
-        ->assertSee('Sampah Menumpuk di Jalan Raya');
+        ->assertSee('Sampah Menumpuk di Jalan Raya')
+        ->press('Hapus')
+        ->assertSee('Hapus Pengaduan?')
+        ->press('[wire\:click="deletePengaduan"]')
+        ->assertSee('Pengaduan berhasil dihapus')
+        ->assertDontSee('Sampah Menumpuk di Jalan Raya');
 });
