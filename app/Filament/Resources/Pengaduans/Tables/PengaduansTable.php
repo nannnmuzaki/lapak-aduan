@@ -170,14 +170,14 @@ class PengaduansTable
                                 FileUpload::make('bukti_terusan_path')
                                     ->label('Bukti Terusan')
                                     ->helperText('Upload bukti terusan pengaduan ke OPD terkait.')
-                                    ->visibility('public')
+                                    ->disk('public')
                                     ->directory('bukti-terusan')
                                     ->visible(fn () => auth()->user()->can('respond_pengaduan')),
                                 
                                 FileUpload::make('bukti_balasan_path')
                                     ->label('Bukti Balasan')
                                     ->helperText('Upload bukti balasan dari OPD terkait.')
-                                    ->visibility('public')
+                                    ->disk('public')
                                     ->directory('bukti-balasan')
                                     ->visible(fn () => auth()->user()->can('respond_pengaduan')),
                             ]),
