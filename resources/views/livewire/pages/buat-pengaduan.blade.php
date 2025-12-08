@@ -150,7 +150,7 @@
                     </div>
                 </label>
 
-                <label class="flex items-start gap-3">
+                {{-- <label class="flex items-start gap-3">
                     <input wire:model="perlu_tindak_lanjut" type="checkbox"
                         class="w-4 h-4 mt-1 border-gray-300 rounded text-sky-600 focus:ring-sky-500">
                     <div>
@@ -158,7 +158,7 @@
                         <div class="text-sm text-gray-600 dark:text-gray-400">Pengaduan memerlukan tindak lanjut dari
                             OPD</div>
                     </div>
-                </label>
+                </label> --}}
             </div>
         </div>
 

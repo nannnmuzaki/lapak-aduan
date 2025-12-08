@@ -46,7 +46,7 @@ class BuatPengaduan extends Component
 
     public $is_profile_anonymous = false;
     public $is_pengaduan_public = true;
-    public $perlu_tindak_lanjut = true;
+    public $perlu_tindak_lanjut = false;
 
     #[Layout('components.layouts.app')]
     #[Title('Buat Pengaduan - Lapak Aduan')]
