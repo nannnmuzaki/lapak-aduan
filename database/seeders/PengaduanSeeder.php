@@ -37,6 +37,7 @@ class PengaduanSeeder extends Seeder
 
         $pengaduanData = [
             [
+                'days_ago' => 10,
                 'user' => $users->random(),
                 'jenis' => $jenisKeluhan,
                 'kategori' => $kategoriInfrastruktur,
@@ -55,6 +56,7 @@ class PengaduanSeeder extends Seeder
                 'balasan' => 'Terima kasih atas laporannya. Tim kami sudah melakukan pengecekan dan perbaikan jalan akan dilaksanakan minggu depan. Estimasi perbaikan 3-5 hari kerja.',
             ],
             [
+                'days_ago' => 7,
                 'user' => $users->random(),
                 'jenis' => $jenisKeluhan,
                 'kategori' => $kategoriKesehatan,
@@ -72,6 +74,7 @@ class PengaduanSeeder extends Seeder
                 'perlu_tindak_lanjut' => true,
             ],
             [
+                'days_ago' => 5,
                 'user' => $users->random(),
                 'jenis' => $jenisKeluhan,
                 'kategori' => $kategoriLingkungan,
@@ -90,6 +93,7 @@ class PengaduanSeeder extends Seeder
                 'balasan' => 'Terima kasih informasinya. Petugas kami sudah melakukan pengangkutan sampah dan pembersihan area TPS. Kami akan meningkatkan frekuensi pengangkutan di lokasi tersebut.',
             ],
             [
+                'days_ago' => 3,
                 'user' => $users->random(),
                 'jenis' => $jenisUsulan,
                 'kategori' => $kategoriTransportasi,
@@ -107,6 +111,7 @@ class PengaduanSeeder extends Seeder
                 'perlu_tindak_lanjut' => true,
             ],
             [
+                'days_ago' => 1,
                 'user' => $users->random(),
                 'jenis' => $jenisPertanyaan,
                 'kategori' => $kategoriKependudukan,
@@ -125,6 +130,30 @@ class PengaduanSeeder extends Seeder
             ],
         ];
 
+        // foreach ($pengaduanData as $data) {
+        //     Pengaduan::create([
+        //         'user_id' => $data['user']->id,
+        //         'jenis_pengaduan_id' => $data['jenis']->id,
+        //         'kategori_pengaduan_id' => $data['kategori']->id,
+        //         'channel_pengaduan_id' => $data['channel']->id,
+        //         'opd_id' => $data['opd']->id,
+        //         'judul' => $data['judul'],
+        //         'nama_pengadu' => $data['nama_pengadu'],
+        //         'email_pengadu' => $data['email_pengadu'],
+        //         'telepon_pengadu' => $data['telepon_pengadu'],
+        //         'nomor_pengaduan' => Pengaduan::generateNomorPengaduan($data['channel']->id),
+        //         'isi' => $data['isi'],
+        //         'status_respon' => $data['status_respon'],
+        //         'status_tindak_lanjut' => $data['status_tindak_lanjut'] ?? null,
+        //         'is_verified' => $data['is_verified'],
+        //         'is_pengaduan_public' => $data['is_pengaduan_public'],
+        //         'perlu_tindak_lanjut' => $data['perlu_tindak_lanjut'],
+        //         'balasan' => $data['balasan'] ?? null,
+        //         'created_at' => now()->subDays(rand(1, 30)),
+        //     ]);
+        // }
+
+        // data balasan = null, is_verified = false, status_respon = dalam_proses, created_at = menggunakan days_ago untuk testing
         foreach ($pengaduanData as $data) {
             Pengaduan::create([
                 'user_id' => $data['user']->id,
@@ -138,13 +167,13 @@ class PengaduanSeeder extends Seeder
                 'telepon_pengadu' => $data['telepon_pengadu'],
                 'nomor_pengaduan' => Pengaduan::generateNomorPengaduan($data['channel']->id),
                 'isi' => $data['isi'],
-                'status_respon' => $data['status_respon'],
-                'status_tindak_lanjut' => $data['status_tindak_lanjut'] ?? null,
-                'is_verified' => $data['is_verified'],
+                'status_respon' => 'dalam_proses',
+                'status_tindak_lanjut' => null,
+                'is_verified' => false,
                 'is_pengaduan_public' => $data['is_pengaduan_public'],
                 'perlu_tindak_lanjut' => $data['perlu_tindak_lanjut'],
-                'balasan' => $data['balasan'] ?? null,
-                'created_at' => now()->subDays(rand(1, 30)),
+                'balasan' => null,
+                'created_at' => now()->subDays($data['days_ago']),
             ]);
         }
     }
