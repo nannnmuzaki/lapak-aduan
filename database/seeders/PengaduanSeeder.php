@@ -123,36 +123,12 @@ class PengaduanSeeder extends Seeder
                 'telepon_pengadu' => '085678901234',
                 'isi' => '<p>Selamat siang, saya ingin bertanya mengenai prosedur perpanjangan KTP yang sudah habis masa berlakunya.</p><p>Dokumen apa saja yang perlu disiapkan? Apakah bisa dilakukan secara online atau harus datang langsung? Berapa lama proses pengurusannya? Terima kasih.</p>',
                 'status_respon' => 'telah_direspon',
-                'is_verified' => true,
+                'is_verified' => false,
                 'is_pengaduan_public' => true,
                 'perlu_tindak_lanjut' => false,
-                'balasan' => 'Untuk perpanjangan KTP, silakan datang langsung ke kantor Disdukcapil dengan membawa KTP lama dan KK. Proses cetak KTP baru sekitar 7-14 hari kerja. Saat ini belum tersedia layanan online. Terima kasih.',
             ],
         ];
-
-        // foreach ($pengaduanData as $data) {
-        //     Pengaduan::create([
-        //         'user_id' => $data['user']->id,
-        //         'jenis_pengaduan_id' => $data['jenis']->id,
-        //         'kategori_pengaduan_id' => $data['kategori']->id,
-        //         'channel_pengaduan_id' => $data['channel']->id,
-        //         'opd_id' => $data['opd']->id,
-        //         'judul' => $data['judul'],
-        //         'nama_pengadu' => $data['nama_pengadu'],
-        //         'email_pengadu' => $data['email_pengadu'],
-        //         'telepon_pengadu' => $data['telepon_pengadu'],
-        //         'nomor_pengaduan' => Pengaduan::generateNomorPengaduan($data['channel']->id),
-        //         'isi' => $data['isi'],
-        //         'status_respon' => $data['status_respon'],
-        //         'status_tindak_lanjut' => $data['status_tindak_lanjut'] ?? null,
-        //         'is_verified' => $data['is_verified'],
-        //         'is_pengaduan_public' => $data['is_pengaduan_public'],
-        //         'perlu_tindak_lanjut' => $data['perlu_tindak_lanjut'],
-        //         'balasan' => $data['balasan'] ?? null,
-        //         'created_at' => now()->subDays(rand(1, 30)),
-        //     ]);
-        // }
-
+        
         // data balasan = null, is_verified = false, status_respon = dalam_proses, created_at = menggunakan days_ago untuk testing
         foreach ($pengaduanData as $data) {
             Pengaduan::create([
@@ -167,12 +143,12 @@ class PengaduanSeeder extends Seeder
                 'telepon_pengadu' => $data['telepon_pengadu'],
                 'nomor_pengaduan' => Pengaduan::generateNomorPengaduan($data['channel']->id),
                 'isi' => $data['isi'],
-                'status_respon' => 'dalam_proses',
-                'status_tindak_lanjut' => null,
-                'is_verified' => false,
+                'status_respon' => $data['status_respon'],
+                'status_tindak_lanjut' => $data['status_tindak_lanjut'] ?? null,
+                'is_verified' => $data['is_verified'],
                 'is_pengaduan_public' => $data['is_pengaduan_public'],
                 'perlu_tindak_lanjut' => $data['perlu_tindak_lanjut'],
-                'balasan' => null,
+                'balasan' => $data['balasan'] ?? null,
                 'created_at' => now()->subDays($data['days_ago']),
             ]);
         }
