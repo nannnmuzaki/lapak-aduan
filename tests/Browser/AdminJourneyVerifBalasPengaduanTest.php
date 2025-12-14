@@ -7,7 +7,7 @@ beforeEach(function () {
     $this->seed(DatabaseSeeder::class);
 });
 
-test('Admin journey balas pengaduan', function () {
+test('Admin journey verif & balas pengaduan', function () {
     $admin = User::where('email', 'admin@lapakaduan.go.id')->first();
 
     visit('/')
